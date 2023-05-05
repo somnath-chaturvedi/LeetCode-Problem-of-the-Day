@@ -1,0 +1,37 @@
+class Solution {
+    public int maxVowels(String s, int k) {
+        int length = s.length();
+        List<Character> vowels = new ArrayList<>();
+        vowels.add('a');
+        vowels.add('e');
+        vowels.add('i');
+        vowels.add('o');
+        vowels.add('u');
+        int maxLength = Integer.MIN_VALUE;
+        int first = 0;
+        int last = 0;
+        int countVowels = 0;
+        while(last < k){
+            char c = s.charAt(last);
+            if(vowels.contains(c)){
+                countVowels++;
+            }
+            last++;
+        }
+        maxLength = countVowels;
+        while(last < length){
+            char firstC = s.charAt(first);
+            char lastC = s.charAt(last);
+            if(vowels.contains(firstC) && !vowels.contains(lastC)){
+                countVowels--;
+            }
+            else if(!vowels.contains(firstC) && vowels.contains(lastC)){
+                countVowels++;
+            }
+            maxLength = Math.max(maxLength,countVowels);
+            first++;
+            last++;
+        }
+        return maxLength;
+    }
+}
